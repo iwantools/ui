@@ -1,0 +1,614 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "iwantools-base",
+  "homepage": "https://github.com/iwantools/iwan-admin",
+  "items": [
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "api-error",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/http.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/api-error.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0",
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "dependencies": [
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0",
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/collapsible.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "dependencies": [
+        "cmdk@^1.1.1",
+        "cn@^0.5.0",
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/dialog.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/input-group.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/uix/command.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0",
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0",
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "form",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0",
+        "react-hook-form@^7.90.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/form.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "http",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/lib/http.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/button.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/input.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/input-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "dependencies": [
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "dependencies": [
+        "cn@^0.5.0",
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pattern-confirm-dialog",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/alert.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/alert-dialog.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/api-error.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/patterns/ConfirmDialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pattern-data-table",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/pattern-empty-state.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/skeleton.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/table.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/patterns/DataTable.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pattern-empty-state",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/patterns/EmptyState.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pattern-feedback",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/alert.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/api-error.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/patterns/Feedback.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pattern-filter-bar",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/button.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/select.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/patterns/FilterBar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pattern-form-field",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/patterns/FormField.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pattern-page-header",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/patterns/PageHeader.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pattern-pagination",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/button.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/pagination.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/select.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/patterns/Pagination.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pattern-status-badge",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/badge.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/patterns/StatusBadge.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0",
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0",
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.0",
+        "lucide-react@^1.61.0"
+      ],
+      "registryDependencies": [
+        "https://iwantools.github.io/ui/v1.0.0/r/button.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/input.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/separator.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/sheet.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/skeleton.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/tooltip.json",
+        "https://iwantools.github.io/ui/v1.0.0/r/use-mobile.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "dependencies": [
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "dependencies": [
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "dependencies": [
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react@1.9.0",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "use-mobile",
+      "type": "registry:hook",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/hooks/use-mobile.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.7.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    }
+  ]
+}

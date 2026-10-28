@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "http",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/lib/http.ts",
+      "content": "/**\n * Orval mutator —— 全应用唯一允许触碰 fetch 的位置。\n *\n * 会话：HttpOnly Cookie 由浏览器同源自动携带（无 token 存储）。\n * CSRF：非安全方法从 XSRF-TOKEN cookie 取值回填 X-XSRF-TOKEN 头（SPA 方案）。\n * 信封：后端统一 ApiResponse{code,message,data,traceId}；非 OK code 与 HTTP 错误\n * 一律抛错（错误响应不进 Query 缓存，成功分支即业务数据）。\n */\nexport class UnauthorizedError extends Error {\n  constructor(message = '未登录或登录已过期') {\n    super(message);\n    this.name = 'UnauthorizedError';\n  }\n}\n\nexport class ApiError extends Error {\n  readonly code: string;\n  readonly status: number;\n  readonly traceId?: string;\n\n  constructor(code: string, status: number, message: string, traceId?: string) {\n    super(message);\n    this.name = 'ApiError';\n    this.code = code;\n    this.status = status;\n    this.traceId = traceId;\n  }\n}\n\ninterface ApiResponseEnvelope {\n  /** 后端业务码：0 表示成功，非 0 为 5 位错误码 */\n  code?: number;\n  message?: string;\n  data?: unknown;\n  traceId?: string;\n}\n\nconst UNSAFE_METHODS = new Set(['POST', 'PUT', 'PATCH', 'DELETE']);\n\nfunction csrfToken(): string | null {\n  const match = document.cookie.match(/(?:^|;\\s*)XSRF-TOKEN=([^;]+)/);\n  return match ? decodeURIComponent(match[1]) : null;\n}\n\nexport async function adminFetch<T>(url: string, init: RequestInit = {}): Promise<T> {\n  const headers = new Headers(init.headers);\n  if (init.body !== undefined && !headers.has('Content-Type')) {\n    headers.set('Content-Type', 'application/json');\n  }\n  const method = (init.method ?? 'GET').toUpperCase();\n  if (UNSAFE_METHODS.has(method)) {\n    const token = csrfToken();\n    if (token) {\n      headers.set('X-XSRF-TOKEN', token);\n    }\n  }\n\n  let response: Response;\n  try {\n    response = await fetch(url, { ...init, headers, credentials: 'same-origin' });\n  } catch {\n    throw new ApiError('NETWORK_ERROR', 0, '网络异常，请稍后重试');\n  }\n\n  let body: ApiResponseEnvelope | null = null;\n  try {\n    body = (await response.json()) as ApiResponseEnvelope;\n  } catch {\n    // 非 JSON 响应（网关错误页等）按 HTTP 状态处理\n  }\n\n  if (response.status === 401) {\n    throw new UnauthorizedError(body?.message);\n  }\n  // 204 No Content：后端对幂等写操作（重置密码、吊销设备等）的成功约定，无信封体\n  if (response.status === 204) {\n    return null as T;\n  }\n  if (!response.ok || body === null || body.code !== 0) {\n    // 业务码统一转成字符串放进入错误对象，便于日志与上报统一处理；\n    // 没有业务码（网关错误页等）时退回 HTTP 状态。\n    const bizCode = body?.code;\n    throw new ApiError(\n      bizCode !== undefined && bizCode !== 0 ? String(bizCode) : `HTTP_${response.status}`,\n      response.status,\n      body?.message ?? `请求失败（HTTP ${response.status}）`,\n      body?.traceId,\n    );\n  }\n  return body.data as T;\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "type": "registry:lib"
+}

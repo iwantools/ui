@@ -7,15 +7,15 @@ iwantools UI 组件 registry 的**自动生成产物仓**：源码事实源在 [
 
 ```bash
 # ① 命名空间（推荐）：components.json 的 registries 注册一次（见下方 URL 模板），之后短名安装
-pnpm dlx shadcn add registry @iwantools=https://iwantools.github.io/ui/v1-dev/r/{name}.json
+pnpm dlx shadcn add registry @iwantools=https://iwantools.github.io/ui/v1.0.0/r/{name}.json
 pnpm dlx shadcn add @iwantools/pattern-feedback @iwantools/command
 
 # ② 单件直拉（GitHub Pages 主通道）
-pnpm dlx shadcn add https://iwantools.github.io/ui/v1-dev/r/pattern-feedback.json
+pnpm dlx shadcn add https://iwantools.github.io/ui/v1.0.0/r/pattern-feedback.json
 
 # 备用通道（tag 不可变，三通道内容一致）
-#   jsDelivr: https://cdn.jsdelivr.net/gh/iwantools/ui@v1-dev/r/<item>.json
-#   raw:      https://raw.githubusercontent.com/iwantools/ui/v1-dev/r/<item>.json
+#   jsDelivr: https://cdn.jsdelivr.net/gh/iwantools/ui@v1.0.0/r/<item>.json
+#   raw:      https://raw.githubusercontent.com/iwantools/ui/v1.0.0/r/<item>.json
 ```
 
 item 清单见各版本目录的 `registry.json`（ui 原件 + `pattern-*` 组合件 + fork 件 + hooks/lib）。
@@ -25,4 +25,4 @@ item 清单见各版本目录的 `registry.json`（ui 原件 + `pattern-*` 组�
 
 | 目录 | 来源 |
 | --- | --- |
-| v1-dev | iwan-admin（本次发布；正式版以基座发行 tag 命名） |
+| v1.0.0 | iwan-admin（本次发布；正式版以基座发行 tag 命名） |

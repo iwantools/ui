@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-form-field",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://iwantools.github.io/ui/v1.0.0/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/patterns/FormField.tsx",
+      "content": "import type { ReactNode } from 'react';\nimport { cn } from '@/lib/utils';\n\n/**\n * 表单字段 pattern（非 RHF 表单用；RHF 表单继续用 ui/form 的 FormField/FormItem）：\n * 把「label → 控件 → 说明 → 错误」四段关系固化成一次组装，并统一 a11y 连线：\n * 控件拿到 `id`（label 的 htmlFor 目标）、`aria-describedby`（说明 + 错误）、`aria-invalid`、`aria-required`。\n *\n * 渲染函数形态保证连线一定落在真正的控件元素上——不用 Slot 包裹，\n * 避免 id/aria 挂到包装 div/span 上导致点 label 不聚焦、错误不被朗读。\n *\n * 只依赖 tokens、ui Label 与 React 类型；不感知请求、权限与业务规则。\n */\nexport interface FieldControlProps {\n  id: string;\n  'aria-describedby': string | undefined;\n  'aria-invalid': boolean | undefined;\n  'aria-required': boolean | undefined;\n}\n\nexport interface FormFieldProps {\n  /** 必填：作为控件 id 与 aria-describedby 的命名空间，页面内唯一 */\n  id: string;\n  label: ReactNode;\n  /** 辅助说明（渲染为 muted 小字，并被 aria-describedby 引用） */\n  description?: ReactNode;\n  /** 校验错误文案（非空即 aria-invalid，并进入 aria-describedby） */\n  error?: string;\n  required?: boolean;\n  className?: string;\n  /** 控件渲染函数：把返回的 props 展开到 Input/Textarea/SelectTrigger 上 */\n  children: (control: FieldControlProps) => ReactNode;\n}\n\nexport function FormField({ id, label, description, error, required, className, children }: FormFieldProps) {\n  const descriptionId = description ? `${id}-description` : undefined;\n  const errorId = error ? `${id}-error` : undefined;\n  const describedBy = [descriptionId, errorId].filter(Boolean).join(' ') || undefined;\n\n  return (\n    <div data-slot=\"form-field\" className={cn('grid gap-1.5', className)}>\n      <label\n        htmlFor={id}\n        className={cn('text-sm leading-[15px] font-medium', error ? 'text-danger' : 'text-foreground')}\n      >\n        {label}\n        {required ? (\n          <span aria-hidden className=\"ml-0.5 text-danger-strong\">\n            *\n          </span>\n        ) : null}\n      </label>\n      {children({\n        id,\n        'aria-describedby': describedBy,\n        'aria-invalid': error ? true : undefined,\n        'aria-required': required ? true : undefined,\n      })}\n      {description ? (\n        <p id={descriptionId} className=\"text-xs leading-[13px] text-muted-foreground\">\n          {description}\n        </p>\n      ) : null}\n      {error ? (\n        <p id={errorId} role=\"alert\" className=\"text-sm leading-[15px] font-medium text-danger\">\n          {error}\n        </p>\n      ) : null}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

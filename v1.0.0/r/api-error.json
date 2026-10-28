@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "api-error",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://iwantools.github.io/ui/v1.0.0/r/http.json"
+  ],
+  "files": [
+    {
+      "path": "src/lib/api-error.ts",
+      "content": "import { ApiError } from '@/lib/http';\n\nexport interface ApiErrorCopy {\n  message: string;\n  traceId?: string;\n}\n\n/** mutation 失败的统一文案：优先后端 message，带 traceId 便于排查 */\nexport function describeApiError(error: unknown, fallback = '操作失败，请稍后重试'): ApiErrorCopy {\n  if (error instanceof ApiError) {\n    return { message: error.message, traceId: error.traceId };\n  }\n  if (error instanceof Error && error.message) {\n    return { message: error.message };\n  }\n  return { message: fallback };\n}\n\n/** 单句错误文案（不需要 traceId 的提示场景） */\nexport function describeApiErrorMessage(error: unknown, fallback = '操作失败，请稍后重试'): string {\n  return describeApiError(error, fallback).message;\n}\n\n/** 乐观锁冲突（HTTP 409）判定：命中时保留表单输入并刷新服务端版本 */\nexport function isConflictError(error: unknown): boolean {\n  return error instanceof ApiError && error.status === 409;\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "type": "registry:lib"
+}
