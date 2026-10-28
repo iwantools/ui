@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-feedback",
+  "dependencies": [
+    "lucide-react@^1.61.0"
+  ],
+  "registryDependencies": [
+    "https://iwantools.github.io/ui/v1-dev/r/alert.json",
+    "https://iwantools.github.io/ui/v1-dev/r/api-error.json",
+    "https://iwantools.github.io/ui/v1-dev/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/patterns/Feedback.tsx",
+      "content": "import type { ReactNode } from 'react';\nimport { AlertCircle, CheckCircle2, RefreshCw, TriangleAlert } from 'lucide-react';\nimport { Button } from '@/components/ui/button';\nimport { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';\nimport { describeApiError, type ApiErrorCopy } from '@/lib/api-error';\n\ninterface QueryErrorAlertProps {\n  error: unknown;\n  onRetry: () => void;\n  retrying?: boolean;\n  title?: string;\n  description?: string;\n}\n\n/** 查询失败：保留筛选/分页等现场，提供重试（对齐 Vue EzQueryError 的用途） */\nexport function QueryErrorAlert({\n  error,\n  onRetry,\n  retrying,\n  title = '列表未更新',\n  description = '当前请求未能取得最新结果，筛选与分页位置已保留。',\n}: QueryErrorAlertProps) {\n  if (!error) {\n    return null;\n  }\n  const copy = describeApiError(error, '请求失败，请稍后重试');\n  return (\n    <Alert variant=\"destructive\" className=\"mb-4\">\n      <AlertCircle aria-hidden />\n      <AlertTitle>{title}</AlertTitle>\n      <AlertDescription>\n        <p>{description}</p>\n        <p className=\"mt-1\">{copy.message}</p>\n        {copy.traceId ? <p className=\"mt-1 font-mono text-xs\">traceId: {copy.traceId}</p> : null}\n        <Button variant=\"outline\" size=\"sm\" className=\"mt-2\" disabled={retrying} onClick={onRetry}>\n          <RefreshCw aria-hidden />\n          {retrying ? '正在重试…' : '重新加载'}\n        </Button>\n      </AlertDescription>\n    </Alert>\n  );\n}\n\ninterface MutationErrorAlertProps {\n  error: unknown;\n  title?: string;\n  fallbackMessage?: string;\n}\n\n/** mutation 失败的行内错误反馈（对齐 Vue EzFormError 的用途，保留 traceId） */\nexport function MutationErrorAlert({\n  error,\n  title = '操作未完成',\n  fallbackMessage = '操作失败，请稍后重试',\n}: MutationErrorAlertProps) {\n  if (!error) {\n    return null;\n  }\n  const copy: ApiErrorCopy = describeApiError(error, fallbackMessage);\n  return (\n    <Alert variant=\"destructive\">\n      <AlertCircle aria-hidden />\n      <AlertTitle>{title}</AlertTitle>\n      <AlertDescription>\n        <p>{copy.message}</p>\n        {copy.traceId ? <p className=\"mt-1 font-mono text-xs\">traceId: {copy.traceId}</p> : null}\n      </AlertDescription>\n    </Alert>\n  );\n}\n\n/** 行内成功反馈（对齐 Vue message.success 的关键提示语） */\nexport function NoticeAlert({ children, onDismiss }: { children: ReactNode; onDismiss?: () => void }) {\n  if (!children) {\n    return null;\n  }\n  return (\n    <Alert className=\"mb-4 border-success-border text-success\">\n      <CheckCircle2 aria-hidden />\n      <AlertDescription className=\"flex items-center justify-between gap-2 [&_p]:leading-relaxed\">\n        <span>{children}</span>\n        {onDismiss ? (\n          <Button variant=\"ghost\" size=\"sm\" onClick={onDismiss}>\n            知道了\n          </Button>\n        ) : null}\n      </AlertDescription>\n    </Alert>\n  );\n}\n\n/** 通用警示条（对齐 Vue NAlert 的提示位），warning 三件套配色 */\nexport function WarningAlert({ children }: { children: ReactNode }) {\n  return (\n    <Alert className=\"mb-4 border-warning-border bg-warning-soft text-warning\">\n      <TriangleAlert aria-hidden />\n      <AlertDescription>{children}</AlertDescription>\n    </Alert>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

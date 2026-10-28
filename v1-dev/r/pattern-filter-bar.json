@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-filter-bar",
+  "dependencies": [
+    "lucide-react@^1.61.0"
+  ],
+  "registryDependencies": [
+    "https://iwantools.github.io/ui/v1-dev/r/button.json",
+    "https://iwantools.github.io/ui/v1-dev/r/select.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/patterns/FilterBar.tsx",
+      "content": "import type { ReactNode } from 'react';\nimport { RotateCcw } from 'lucide-react';\nimport { Button } from '@/components/ui/button';\nimport { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';\n\nexport interface FilterOption {\n  value: string;\n  label: string;\n}\n\n/** 「全部」哨兵值：空字符串 value 会被 Select 当作未选中渲染 placeholder，用它映射「筛选为空」 */\nconst ALL_VALUE = '__all__';\n\ninterface FilterSelectProps {\n  value: string;\n  onChange: (value: string) => void;\n  options: readonly FilterOption[];\n  placeholder: string;\n  ariaLabel: string;\n  allLabel?: string;\n  className?: string;\n}\n\n/** 筛选下拉：带「全部」项用于清空（空值经哨兵映射回 ''） */\nexport function FilterSelect({\n  value,\n  onChange,\n  options,\n  placeholder,\n  ariaLabel,\n  allLabel = '全部',\n  className,\n}: FilterSelectProps) {\n  return (\n    <Select\n      value={value === '' ? ALL_VALUE : value}\n      // Base UI 的 onValueChange 会在清空时回调 null；Sentinel 负责把「全部」映射回空串\n      onValueChange={(next) => onChange(next == null || next === ALL_VALUE ? '' : next)}\n      items={[{ value: ALL_VALUE, label: allLabel }, ...options]}\n    >\n      <SelectTrigger className={className} aria-label={ariaLabel}>\n        <SelectValue placeholder={placeholder} />\n      </SelectTrigger>\n      <SelectContent>\n        <SelectItem value={ALL_VALUE}>{allLabel}</SelectItem>\n        {options.map((option) => (\n          <SelectItem key={option.value} value={option.value}>\n            {option.label}\n          </SelectItem>\n        ))}\n      </SelectContent>\n    </Select>\n  );\n}\n\ninterface FilterBarProps {\n  /** 筛选控件组（搜索框、下拉等），从左到右排列 */\n  children: ReactNode;\n  /** 右侧动作区（刷新、视图切换等），自动推到行尾 */\n  actions?: ReactNode;\n  /** 提供时渲染「重置」按钮；筛选生效期间才传回调，可随筛选清空而消失 */\n  onReset?: () => void;\n}\n\n/** 列表筛选工具条（S-02 工具条）：控件左排、动作右排、可选重置；窄屏按控件自然折行 */\nexport function FilterBar({ children, actions, onReset }: FilterBarProps) {\n  return (\n    <div className=\"mb-4 flex flex-wrap items-center gap-2\">\n      {children}\n      {onReset ? (\n        <Button variant=\"ghost\" size=\"sm\" onClick={onReset}>\n          <RotateCcw aria-hidden />\n          重置\n        </Button>\n      ) : null}\n      {actions ? <div className=\"ml-auto flex items-center gap-2\">{actions}</div> : null}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

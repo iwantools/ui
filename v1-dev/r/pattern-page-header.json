@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-page-header",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://iwantools.github.io/ui/v1-dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/patterns/PageHeader.tsx",
+      "content": "import type { ReactNode } from 'react';\nimport { cn } from '@/lib/utils';\n\n/**\n * 页头 pattern（设计体系两种落地形态）：\n * - `stack`：标题块在上、动作区右对齐可换行（系统模块页面口径，自带 mb-4 页身留白）\n * - `inline`：单行布局，标题块 flex-1、动作区固定右对齐（IAM 列表页口径，间距交给父级 gap）\n *\n * 只依赖 tokens 与 React 类型：不感知路由、权限与请求，标题与动作由页面传入。\n */\nexport interface PageHeaderProps {\n  title: string;\n  /** 说明行（计数/口径提示）；缺省不渲染，标题块高度随之收敛 */\n  description?: ReactNode;\n  /** 右侧动作区（按钮组）；缺省不渲染动作容器 */\n  actions?: ReactNode;\n  layout?: 'stack' | 'inline';\n  /** 追加到 <header> 的类（如 shrink-0、自定义外边距） */\n  className?: string;\n  /** 追加到动作容器的类（如 flex-wrap，动作多时允许换行） */\n  actionsClassName?: string;\n}\n\nexport function PageHeader({\n  title,\n  description,\n  actions,\n  layout = 'stack',\n  className,\n  actionsClassName,\n}: PageHeaderProps) {\n  const inline = layout === 'inline';\n  return (\n    <header\n      className={cn(\n        inline ? 'flex items-center gap-4' : 'mb-4 flex flex-wrap items-start justify-between gap-3',\n        className,\n      )}\n    >\n      <div className={cn('min-w-0 space-y-[3px]', inline && 'flex-1')}>\n        <h1 className=\"text-xl leading-6 font-semibold tracking-tight\">{title}</h1>\n        {description ? <p className=\"text-sm leading-[15px] text-muted-foreground\">{description}</p> : null}\n      </div>\n      {actions ? (\n        <div data-slot=\"page-header-actions\" className={cn('flex shrink-0 items-center gap-2', actionsClassName)}>\n          {actions}\n        </div>\n      ) : null}\n    </header>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-empty-state",
+  "dependencies": [
+    "lucide-react@^1.61.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/patterns/EmptyState.tsx",
+      "content": "import type { ReactNode } from 'react';\nimport { Inbox } from 'lucide-react';\n\ninterface EmptyStateProps {\n  /** 自定义图标（默认 Inbox）；置于 48px 圆底内，尺寸建议 22px */\n  icon?: ReactNode;\n  title: string;\n  description?: string;\n  /** 次操作（设计稿 S-08：次按钮在主按钮左侧，如「清除筛选」） */\n  secondaryAction?: ReactNode;\n  /** 主操作（如「新建」/「邀请新用户」）；建议 Button size=\"sm\" */\n  primaryAction?: ReactNode;\n}\n\n/** 空态（S-08 空状态卡）：图标圈 + 标题 + 说明 + 可选主/次操作；四种语义（无数据/筛选无结果/无权限/失败）由调用方选文案 */\nexport function EmptyState({ icon, title, description, secondaryAction, primaryAction }: EmptyStateProps) {\n  return (\n    <div className=\"flex flex-col items-center justify-center gap-2.5 py-8 text-center\">\n      <div className=\"flex h-12 w-12 items-center justify-center rounded-full bg-muted text-muted-foreground\">\n        {icon ?? <Inbox className=\"h-[22px] w-[22px]\" aria-hidden />}\n      </div>\n      <p className=\"text-md font-semibold\">{title}</p>\n      {description ? <p className=\"max-w-70 text-sm text-muted-foreground\">{description}</p> : null}\n      {primaryAction || secondaryAction ? (\n        <div className=\"mt-1.5 flex items-center gap-2\">\n          {secondaryAction}\n          {primaryAction}\n        </div>\n      ) : null}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}
